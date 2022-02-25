@@ -3,7 +3,7 @@ import React from 'react';
 import Header from './Header';
 
 export default {
-    title: 'Example/Header',
+    title: 'Layout/Header',
     component: Header,
     parameters: {
     // More on Story layout: https://storybook.js.org/docs/react/configure/story-layout
@@ -14,12 +14,5 @@ export default {
 // eslint-disable-next-line react/jsx-props-no-spreading
 const Template = (args) => <Header {...args} />;
 
-export const LoggedIn = Template.bind({});
-LoggedIn.args = {
-    user: {
-        name: 'Jane Doe',
-    },
-};
-
-export const LoggedOut = Template.bind({});
-LoggedOut.args = {};
+export const Primary = Template.bind({});
+Primary.args = {};

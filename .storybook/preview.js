@@ -1,3 +1,6 @@
+import bootstrapDecorator from "./decorators/bootstrapDecorator";
+import userDecorator from "./decorators/userDecorator";
+
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
@@ -7,3 +10,5 @@ export const parameters = {
     },
   },
 }
+
+export const decorators = [bootstrapDecorator, userDecorator]
