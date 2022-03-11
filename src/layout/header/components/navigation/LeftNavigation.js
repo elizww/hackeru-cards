@@ -1,7 +1,7 @@
 import React from 'react';
 import { useUser } from '../../../../user/UserProvider';
 import NavRouteLink from './NavRouteLink';
-import { ROUTES } from '../../../../model/routes';
+import ROUTES from '../../../../model/routes';
 
 const LeftNavigation = () => {
     const { user } = useUser();

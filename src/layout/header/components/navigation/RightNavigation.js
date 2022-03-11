@@ -1,6 +1,6 @@
 import React from 'react';
 import { useUser } from '../../../../user/UserProvider';
-import { ROUTES } from '../../../../model/routes';
+import ROUTES from '../../../../model/routes';
 import NavRouteLink from './NavRouteLink';
 
 const RightNavigation = () => {
