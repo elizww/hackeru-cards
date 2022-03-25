@@ -1,12 +1,15 @@
 import { BrowserRouter } from 'react-router-dom';
-import Header from './layout/header/Header';
 import { UserProvider } from './user/UserProvider';
+import Layout from './layout/Layout';
+import BCRoutes from './routes/BCRoutes';
 
 const App = () => (
     <div className="App">
         <BrowserRouter>
             <UserProvider>
-                <Header />
+                <Layout>
+                    <BCRoutes />
+                </Layout>
             </UserProvider>
         </BrowserRouter>
     </div>

@@ -1,24 +1,48 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { node } from 'prop-types';
+import useUserEndpoint from './useUserEndpoint';
+import {
+ getUser, removeUser, updateUser,
+} from '../services/localStorageService';
 
 const UserContext = React.createContext(undefined);
 
-const stubUser = {
-    _id: 'user-1',
-    name: 'adi',
-    email: 'adi@example.som',
-    password: 'passcode',
-    biz: true,
-    cards: [],
-    createdAt: '2022-02-13T23:43:03.481+00:00',
-};
-
 const UserProvider = ({ children }) => {
-    const value = useMemo(() => ({ user: stubUser }), []);
+    const [user, setUser] = useState(null);
+    const { signupApi, loginApi } = useUserEndpoint();
+
+    useEffect(async () => {
+        if (!user) {
+            const localStorageUser = getUser();
+            setUser(localStorageUser);
+        }
+    }, []);
+
+    const logout = (() => {
+        removeUser();
+        setUser(null);
+    });
+
+    const login = async (loginUser) => {
+        const {
+            data: { token },
+        } = await loginApi(loginUser);
+        setUser(loginUser);
+        updateUser(token);
+    };
+
+    const register = async (registerUser) => {
+        await signupApi(registerUser);
+        return login(registerUser);
+    };
+
+    const value = useMemo(() => ({
+        user, login, register, logout,
+    }), [user]);
 
     return (
         <UserContext.Provider value={value}>
-            { children }
+            {children}
         </UserContext.Provider>
     );
 };
